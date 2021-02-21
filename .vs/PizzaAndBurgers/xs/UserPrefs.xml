@@ -1,11 +1,11 @@
-﻿<Properties StartupConfiguration="{5E2CE335-7630-4B92-AC54-8B03FC4E873B}|Default">
+﻿<Properties GitUserInfo="UsingGIT" StartupConfiguration="{5E2CE335-7630-4B92-AC54-8B03FC4E873B}|Default">
   <MonoDevelop.Ide.ItemProperties.PizzaAndBurgers PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument=".gitignore">
+  <MonoDevelop.Ide.Workbench>
     <Files>
       <File FileName="PizzaToppings.cs" Line="19" Column="38" />
       <File FileName="Restaurant.cs" Line="55" Column="1" />
       <File FileName="Burger.cs" Line="1" Column="1" />
-      <File FileName=".gitignore" Line="1" Column="1" />
+      <File FileName=".gitignore" Line="31" Column="17" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
