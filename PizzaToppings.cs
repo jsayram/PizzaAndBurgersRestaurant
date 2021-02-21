@@ -17,7 +17,6 @@ namespace PizzaAndBurgers
                 };
 
             return PizzaToppingITems;
-
         }
     }
 }
