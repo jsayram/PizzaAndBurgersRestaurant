@@ -1,37 +1,43 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace PizzaAndBurgers
+namespace PizzaBurgerOOP
 {
     public class Burger
     {
-        // attributes
-        private bool cheese;
-        private bool lettus;
-        private bool pickles;
+        
+        public List<BurgerTopping> burgerToppingsList = new List<BurgerTopping>();
 
-        private List<string> toppingsForBurger = new List<string>();
-
-        //Constructors
-        public Burger() { }
-        public Burger(bool cheese, bool lettus, bool pickles)
+        public Burger()
         {
-            this.cheese = cheese;
-            this.lettus = lettus;
-            this.pickles = pickles;
+
         }
 
-        public bool Cheese { get => cheese; set => cheese = value; }
-        public bool Lettus { get => lettus; set => lettus = value; }
-        public bool Pickles { get => pickles; set => pickles = value; }
-
-        public List<string> AddBurgerToppings(string topping)
+        public List<BurgerTopping> AddBurgerTopping(string pt, decimal price)
         {
-            toppingsForBurger.Add(topping);
+            BurgerTopping burgerTopping = new BurgerTopping();
 
-            return toppingsForBurger;
+            //assign the burger topping variables
+            burgerTopping.ToppingName = pt;
+            burgerTopping.ToppingPrice = price;
+            //return burger topping
+            burgerToppingsList.Add(burgerTopping);
+
+            return burgerToppingsList;
         }
 
+        public void ShowBurger()
+        {
+
+            Console.Clear();
+            foreach (BurgerTopping p in burgerToppingsList)
+            {
+                Console.WriteLine($"BurgerTopping: {p.ToppingName}, BurgerToppingPrice : {p.ToppingPrice}");
+            }
+
+        }
+
+
+        
     }
 }
