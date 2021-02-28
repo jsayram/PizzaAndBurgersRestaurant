@@ -6,10 +6,10 @@ namespace PizzaBurgerOOP
     public class Pizza
     {
         public List<PizzaTopping> pizzaToppingsList = new List<PizzaTopping>();
-  
+
         public Pizza()
         {
-            
+
         }
 
         public List<PizzaTopping> AddPizzaTopping(string pt, decimal price)
@@ -33,13 +33,13 @@ namespace PizzaBurgerOOP
         {
 
             Console.Clear();
-            foreach(PizzaTopping p in pizzaToppingsList)
+            foreach (PizzaTopping p in pizzaToppingsList)
             {
                 Console.WriteLine($"PIzzaTopping: {p.ToppingName}, PizzaToppingPrice : {p.ToppingPrice}");
             }
-           
+
         }
-       
+
 
     }
 }

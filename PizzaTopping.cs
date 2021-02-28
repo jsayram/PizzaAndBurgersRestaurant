@@ -11,7 +11,7 @@ namespace PizzaBurgerOOP
 
         //default constructor
         public PizzaTopping()
-        {   
+        {
         }
 
         //overloaded constructor
@@ -23,7 +23,7 @@ namespace PizzaBurgerOOP
 
         public string ToppingName { get => toppingName; set => toppingName = value; }
         public decimal ToppingPrice { get => toppingPrice; set => toppingPrice = value; }
-    }     
+    }
 }
 
 
