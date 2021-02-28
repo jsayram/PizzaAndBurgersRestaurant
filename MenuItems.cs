@@ -7,7 +7,7 @@ namespace PizzaBurgerOOP
 {
     public class MenuItems
     {
-
+        public MenuItems() { }
 
         public static class MainMenuItems
         {
@@ -34,19 +34,36 @@ namespace PizzaBurgerOOP
             {
                 while (topping != 0)
                 {
+                    
+                    Console.WriteLine("[0] Exit Pizza Toppings");
+                    Console.WriteLine("Pick your Topping: ");
                     topping = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("");
                     if (topping > 0 && topping <= pizzaToppingsMenuItemsList.Count)
                     {
-                        Console.WriteLine($"Choice: {pizzaToppingsMenuItemsList[topping - 1].itemName}");
+                        //Console.WriteLine($"Choice: {pizzaToppingsMenuItemsList[topping - 1].itemName}");
                         pizza.AddPizzaTopping
                         (
                             pizzaToppingsMenuItemsList[topping - 1].itemName,
                             pizzaToppingsMenuItemsList[topping - 1].price
                         );
+                        Console.WriteLine($"\tTopping chosen so far:");
+                        if (pizza.pizzaToppingsList.Count < 0)
+                        {
+                            Console.WriteLine("\t* NONE *");
+                        }
+                        foreach (PizzaTopping p in pizza.pizzaToppingsList)
+                        {
+                            Console.WriteLine($"\t\t\t{p.ToppingName}");
+                        }
+                        Console.WriteLine();
+                        CreateMenu(pizzaToppingsMenuItemsList);
                     }
                     if (topping > pizzaToppingsMenuItemsList.Count)
                     {
-                        Console.WriteLine("Not a valid topping choice, Please");
+                        Console.WriteLine("\nNot a valid topping choice, Please choose again\n");
+                        
+                        CreateMenu(pizzaToppingsMenuItemsList);
                     }
                 }
                 return pizza;
@@ -66,19 +83,36 @@ namespace PizzaBurgerOOP
             {
                 while (topping != 0)
                 {
-                   topping = Convert.ToInt32(Console.ReadLine());
+                    
+                    Console.WriteLine("[0] Exit Burger Toppings");
+                    Console.WriteLine("Pick your topping: ");
+                    topping = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("");
                     if (topping > 0 && topping <= burgerToppingsMenuItemsList.Count)
                     {
-                        Console.WriteLine($"Choice: {burgerToppingsMenuItemsList[topping - 1].itemName}");
+                        //Console.WriteLine($"Choice: {burgerToppingsMenuItemsList[topping - 1].itemName}");
                         burger.AddBurgerTopping
                         (
                             burgerToppingsMenuItemsList[topping - 1].itemName,
                             burgerToppingsMenuItemsList[topping - 1].price
                         );
+                        Console.WriteLine($"\tToppings chosen so far:");
+                        if (burger.burgerToppingsList.Count < 0)
+                        {
+                            Console.WriteLine("\t* NONE *");
+                        }
+                        foreach (BurgerTopping b in burger.burgerToppingsList)
+                        {
+                            Console.WriteLine($"\t\t\t{b.ToppingName}");
+                        }
+                        Console.WriteLine();
+                        CreateMenu(burgerToppingsMenuItemsList);
                     }
                     if (topping > burgerToppingsMenuItemsList.Count)
                     {
-                        Console.WriteLine("Not a valid topping choice, Please");
+                        Console.WriteLine("\nNot a valid topping choice, Please choose again\n");
+                        Console.WriteLine();
+                        CreateMenu(burgerToppingsMenuItemsList);
                     }
                 }
                 return burger;
@@ -106,17 +140,20 @@ namespace PizzaBurgerOOP
         }
 
         public static void CreateMenu(List<(int index, string itemName, decimal price)> myList)
-        {   
+        {
             for (int i = 0; i < myList.Count; i++)
             {
-               Console.WriteLine($"[{myList[i].index}] {myList[i].itemName} Price: {myList[i].price:C}");
+                if (myList[i].itemName.ToLower() == "extra" || myList[i].itemName.ToLower() == "checkout" || myList[i].itemName.ToLower() == "fries" || myList[i].itemName.ToLower() == "drink")
+                {
+                    Console.WriteLine($"[{myList[i].index}] {myList[i].itemName}");
+                }
+                else
+                {
+                    Console.WriteLine($"[{myList[i].index}] {myList[i].itemName} - {myList[i].price:C}");
+                }
+
             }
         }
-
-
-        public MenuItems()
-        {
-            
-        }
+              
     }
 }

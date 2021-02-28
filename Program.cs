@@ -16,11 +16,14 @@ namespace PizzaBurgerOOP
             
             int input = 1;
             while (input != 0)
-            {   
+            {
                 Console.WriteLine("Choose Menu Option");
                 MenuItems.CreateMenu(MenuItems.MainMenuItems.mainMenuItemsList);
                 Console.WriteLine("[0] Exit Restaurant");
+                Console.WriteLine("Your pick: ");
                 input = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("");
+                
                 switch (input)
                 {
                     case 1:
@@ -46,13 +49,18 @@ namespace PizzaBurgerOOP
                         break;
                     case 4:
                         //Checkout
-                        Console.WriteLine("\nTHANK YOU FOR COMMING!!\n");
+                        Console.WriteLine("\nThank you for eating with us!!\n**** Here is your receipt ****\n");
 
-                        order.CheckOut(personMoney);
                         order.ShowBurgerOrder();
                         order.ShowPizzaOrder();
                         order.ShowExtraOrder();
-                        Console.WriteLine("\nGood BYE!\n");
+                        order.CheckOut(personMoney);
+                        Console.WriteLine("\nCome again!!\n Press 0 to exit....\n");
+                        Console.ReadLine();
+                        Console.Clear();
+                        order.MyBurgers.Clear();
+                        order.MyPizzas.Clear();
+                        order.MyExtras.Clear();
                         payed = true;
                         break;
                     default:
@@ -63,11 +71,13 @@ namespace PizzaBurgerOOP
 
             if (!payed)
             {
-                Console.WriteLine("YOU DIDNT PAY!!!!!!! COME BACK");
+                Console.WriteLine("YOU LEFT WITHOUT PAYING!!! SHAME ON YOU!!!!!");
+                Console.WriteLine("\n\nPress Enter to Exit Program....");
                 Console.ReadLine();
             }
             else
             {
+                Console.WriteLine("\n\nPress Enter to Exit Program....");
                 Console.ReadLine();
             }
 
