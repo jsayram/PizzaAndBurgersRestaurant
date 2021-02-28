@@ -151,7 +151,12 @@ namespace PizzaBurgerOOP
             };
 
         }
-
+        public static void ChooseExtraItemsMenu()
+        {
+            Console.WriteLine("\nChoose your Extra Item");
+            MenuItems.CreateMenu(MenuItems.ExtraMenuItems.extraMenuItemsList);
+            Console.WriteLine("[0] Exit Extra Items Menu");
+        }
         public static void CreateMenu(List<(int index, string itemName, decimal price)> myList)
         {
             for (int i = 0; i < myList.Count; i++)
