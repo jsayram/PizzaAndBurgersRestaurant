@@ -14,15 +14,15 @@ namespace PizzaBurgerOOP
             Order order = new Order();
             decimal personMoney = 100m;
             bool payed = false;
-            
-            int input=1;
+
+            int input = 1;
             while (input != 0)
             {
                 Console.WriteLine("Choose Menu Option");
                 MenuItems.CreateMenu(MenuItems.MainMenuItems.mainMenuItemsList);
                 Console.WriteLine("[0] Exit Restaurant");
                 Console.WriteLine("Your pick: ");
-                
+
                 while (!int.TryParse(Console.ReadLine(), out input))
                 {
                     Console.Clear();
@@ -32,9 +32,9 @@ namespace PizzaBurgerOOP
                     Console.WriteLine("You entered an invalid choice");
                     Console.Write("Pick Again ");
                 }
-                
+
                 Console.WriteLine("");
-                
+
                 switch (input)
                 {
                     case 1:
@@ -54,7 +54,7 @@ namespace PizzaBurgerOOP
                         Extra extra = new Extra();
                         int choiceItem = 1;
                         int choiceSize = 1;
-                        order.BuildExtraOrder(choiceItem, choiceSize, order,extra);
+                        order.BuildExtraOrder(choiceItem, choiceSize, order, extra);
                         break;
                     case 4:
                         //Checkout
@@ -71,14 +71,14 @@ namespace PizzaBurgerOOP
                         break;
                     default:
                         char oops;
-                        if(input == 0 && payed == false && (order.MyBurgers.Count+order.MyExtras.Count+order.MyPizzas.Count) > 0)
+                        if (input == 0 && payed == false && (order.MyBurgers.Count + order.MyExtras.Count + order.MyPizzas.Count) > 0)
                         {
                             Console.WriteLine($"\nOops you forgot to pay, did you mean to Checkout and pay instead? Press Y for yes.");
                             while (!char.TryParse(Console.ReadLine(), out oops))
                             {
                                 Console.WriteLine($"\nOops you forgot to pay, did you mean to Checkout and pay instead? Press Y for yes.");
                             }
-                            if(oops == 'y' || oops == 'Y')
+                            if (oops == 'y' || oops == 'Y')
                             {
                                 Console.WriteLine("\nThank you for eating with us!!\n**** Here is your receipt ****\n");
                                 order.ShowBurgerOrder();

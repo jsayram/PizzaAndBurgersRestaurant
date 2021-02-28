@@ -12,8 +12,8 @@ namespace PizzaBurgerOOP
         public List<Extra> MyExtras = new List<Extra>();
 
         public Order()
-        { 
-            
+        {
+
         }
         public void AddToPizzaOrder(Pizza pizza)
         {
@@ -31,10 +31,10 @@ namespace PizzaBurgerOOP
         //--------------Pizzas---------------------
         public void ShowPizzaOrder()
         {
-            
+
             if (MyPizzas.Count > 0)
             {
-               // Console.WriteLine($"My Pizza Order:");
+                // Console.WriteLine($"My Pizza Order:");
                 for (int i = 0; i < MyPizzas.Count; i++)
                 {
                     Console.WriteLine($"Pizzas: {i + 1}");
@@ -62,13 +62,13 @@ namespace PizzaBurgerOOP
             {
                 for (int i = 0; i < MyBurgers.Count; i++)
                 {
-                    Console.WriteLine($"Burgers: {i+1}");
+                    Console.WriteLine($"Burgers: {i + 1}");
                     foreach (BurgerTopping p in MyBurgers[i].burgerToppingsList)
                     {
                         Console.WriteLine($"\t{p.ToppingName}");
                     }
                 }
-            }  
+            }
         }
         public Order BuildBurgerOrder(Order order, int choice, Burger burger)
         {
@@ -87,12 +87,11 @@ namespace PizzaBurgerOOP
                 Console.WriteLine($"Extra Items: {MyExtras.Count}");
                 for (int i = 0; i < Extra.extraItemsList.Count; i++)
                 {
-                  Console.WriteLine($"\t{Extra.extraItemsList[i].extraItemName},{Extra.extraItemsList[i].extraItemSize},{Extra.extraItemsList[i].extraItemSizePrice:C}"); 
-                          
+                    Console.WriteLine($"\t{Extra.extraItemsList[i].extraItemName},{Extra.extraItemsList[i].extraItemSize},{Extra.extraItemsList[i].extraItemSizePrice:C}");
+
                 }
             }
         }
-
 
         public Order BuildExtraOrder(int choiceItem, int choiceSize,Order order,Extra extra)
         {
@@ -142,9 +141,9 @@ namespace PizzaBurgerOOP
         public decimal CheckOut(decimal personMoney)
         {
             decimal itemsTotal = 0;
-            itemsTotal += MyPizzas.Count*MenuItems.MainMenuItems.mainMenuItemsList[1].price;
+            itemsTotal += MyPizzas.Count * MenuItems.MainMenuItems.mainMenuItemsList[1].price;
 
-            itemsTotal += MyBurgers.Count*MenuItems.MainMenuItems.mainMenuItemsList[0].price;
+            itemsTotal += MyBurgers.Count * MenuItems.MainMenuItems.mainMenuItemsList[0].price;
 
 
             for (int i = 0; i < Extra.extraItemsList.Count; i++)
@@ -156,20 +155,20 @@ namespace PizzaBurgerOOP
 
             for (int i = 0; i < MyBurgers.Count; i++)
             {
-                
+
                 foreach (BurgerTopping p in MyBurgers[i].burgerToppingsList)
                 {
                     itemsTotal += p.ToppingPrice;
-                  
+
                 }
             }
 
             for (int i = 0; i < MyPizzas.Count; i++)
             {
-                
+
                 foreach (PizzaTopping p in MyPizzas[i].pizzaToppingsList)
                 {
-                    itemsTotal += p.ToppingPrice; 
+                    itemsTotal += p.ToppingPrice;
                 }
             }
             Console.WriteLine($"\nOrder Total: {itemsTotal:C}\n");

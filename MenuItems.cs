@@ -11,14 +11,14 @@ namespace PizzaBurgerOOP
 
         public static class MainMenuItems
         {
-           public static List<(int index, string itemName, decimal price)> mainMenuItemsList = new List<(int index,string itemName, decimal price)>
+            public static List<(int index, string itemName, decimal price)> mainMenuItemsList = new List<(int index, string itemName, decimal price)>
             {
               (1, "Burger",5.0m),
               (2, "Pizza",2m),
               (3, "Extra",0m),
               (4, "Checkout",0m),
             };
-                        
+
         }
 
         public static class PizzaToppingsMenuItems
@@ -30,7 +30,7 @@ namespace PizzaBurgerOOP
               (3, "Sausage",1m)
             };
 
-            public static Pizza ChoosePizzaToppings(int topping,Pizza pizza)
+            public static Pizza ChoosePizzaToppings(int topping, Pizza pizza)
             {
                 while (topping != 0)
                 {
@@ -68,7 +68,7 @@ namespace PizzaBurgerOOP
                     if (topping > pizzaToppingsMenuItemsList.Count)
                     {
                         Console.WriteLine("\nNot a valid topping choice, Please choose again\n");
-                        
+
                         CreateMenu(pizzaToppingsMenuItemsList);
                     }
                 }
@@ -172,6 +172,6 @@ namespace PizzaBurgerOOP
 
             }
         }
-              
+
     }
 }
