@@ -24,6 +24,10 @@ namespace PizzaBurgerOOP
 
             return pizzaToppingsList;
         }
+        public void ClearPizzaToppings()
+        {
+            pizzaToppingsList.Clear();
+        }
 
         public void ShowPizza()
         {

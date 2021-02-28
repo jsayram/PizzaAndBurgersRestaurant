@@ -34,14 +34,20 @@ namespace PizzaBurgerOOP
             {
                 while (topping != 0)
                 {
-                    
                     Console.WriteLine("[0] Exit Pizza Toppings");
-                    Console.WriteLine("Pick your Topping: ");
-                    topping = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Pick your topping: ");
+                    while (!int.TryParse(Console.ReadLine(), out topping))
+                    {
+                        Console.Clear();
+                        Console.WriteLine("\nChoose your Pizza Toppings");
+                        CreateMenu(pizzaToppingsMenuItemsList);
+                        Console.WriteLine("[0] Exit Pizza Toppings");
+                        Console.WriteLine("Pick your topping: ");
+                    }
+
                     Console.WriteLine("");
                     if (topping > 0 && topping <= pizzaToppingsMenuItemsList.Count)
                     {
-                        //Console.WriteLine($"Choice: {pizzaToppingsMenuItemsList[topping - 1].itemName}");
                         pizza.AddPizzaTopping
                         (
                             pizzaToppingsMenuItemsList[topping - 1].itemName,
@@ -83,14 +89,20 @@ namespace PizzaBurgerOOP
             {
                 while (topping != 0)
                 {
-                    
                     Console.WriteLine("[0] Exit Burger Toppings");
                     Console.WriteLine("Pick your topping: ");
-                    topping = Convert.ToInt32(Console.ReadLine());
+                    while (!int.TryParse(Console.ReadLine(), out topping))
+                    {
+                        Console.Clear();
+                        Console.WriteLine("\nChoose your Burger Toppings");
+                        CreateMenu(burgerToppingsMenuItemsList);
+                        Console.WriteLine("[0] Exit Burger Toppings");
+                        Console.WriteLine("Pick your topping: ");
+                    }
+
                     Console.WriteLine("");
                     if (topping > 0 && topping <= burgerToppingsMenuItemsList.Count)
                     {
-                        //Console.WriteLine($"Choice: {burgerToppingsMenuItemsList[topping - 1].itemName}");
                         burger.AddBurgerTopping
                         (
                             burgerToppingsMenuItemsList[topping - 1].itemName,
@@ -134,7 +146,8 @@ namespace PizzaBurgerOOP
             {
               (1, "Small",5.0m),
               (2, "Medium",2.50m),
-              (3, "Large",3.50m)
+              (3, "Large",3.50m),
+              (4, "x-large",1m)
             };
 
         }

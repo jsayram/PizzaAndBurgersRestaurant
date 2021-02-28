@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
+using System.Runtime.CompilerServices;
 using System.Xml.Serialization;
 
 namespace PizzaBurgerOOP
@@ -14,14 +15,24 @@ namespace PizzaBurgerOOP
             decimal personMoney = 100m;
             bool payed = false;
             
-            int input = 1;
+            int input=1;
             while (input != 0)
             {
                 Console.WriteLine("Choose Menu Option");
                 MenuItems.CreateMenu(MenuItems.MainMenuItems.mainMenuItemsList);
                 Console.WriteLine("[0] Exit Restaurant");
                 Console.WriteLine("Your pick: ");
-                input = Convert.ToInt32(Console.ReadLine());
+                
+                while (!int.TryParse(Console.ReadLine(), out input))
+                {
+                    Console.Clear();
+                    Console.WriteLine("Choose Menu Option");
+                    MenuItems.CreateMenu(MenuItems.MainMenuItems.mainMenuItemsList);
+                    Console.WriteLine("[0] Exit Restaurant");
+                    Console.WriteLine("You entered an invalid choice");
+                    Console.Write("Pick Again ");
+                }
+                
                 Console.WriteLine("");
                 
                 switch (input)
@@ -55,33 +66,48 @@ namespace PizzaBurgerOOP
                         Console.WriteLine("\nCome again!!\n Press 0 to exit....\n");
                         Console.ReadLine();
                         Console.Clear();
-                        order.MyBurgers.Clear();
-                        order.MyPizzas.Clear();
-                        order.MyExtras.Clear();
+                        order.ClearAllOrdersAndList();
                         payed = true;
                         break;
                     default:
-                        string oops;
+                        char oops;
                         if(input == 0 && payed == false && (order.MyBurgers.Count+order.MyExtras.Count+order.MyPizzas.Count) > 0)
                         {
-                            Console.WriteLine($"\nOops you forgot to pay, did you mean to Checkout instead? y/n");
-                            oops =  Console.ReadLine();
+                            Console.WriteLine($"\nOops you forgot to pay, did you mean to Checkout and pay instead? Press Y for yes.");
+                            while (!char.TryParse(Console.ReadLine(), out oops))
+                            {
+                                Console.WriteLine($"\nOops you forgot to pay, did you mean to Checkout and pay instead? Press Y for yes.");
+                            }
+                            if(oops == 'y' || oops == 'Y')
+                            {
+                                Console.WriteLine("\nThank you for eating with us!!\n**** Here is your receipt ****\n");
+                                order.ShowBurgerOrder();
+                                order.ShowPizzaOrder();
+                                order.ShowExtraOrder();
+                                order.CheckOut(personMoney);
+                                Console.WriteLine("\nCome again!!\n Press 0 to exit....\n");
+                                Console.ReadLine();
+                                Console.Clear();
+                                order.ClearAllOrdersAndList();
+                                payed = true;
+                            }
+                            else
+                            {
+                                input = 0;
+                                payed = false;
+                                Console.WriteLine($"YOU LEFT WITHOUT PAYING " + order.CheckOut(personMoney).ToString("C") + "\nSHAME ON YOU!!!!!");
+                                Console.WriteLine("\n\nPress Enter to Exit Program....");
+                                Console.ReadLine();
+                                //continue;
+                            }
                         }
-                        
+                        else
+                        {
+                            Console.WriteLine("\n\nPress Enter to Exit Program....");
+                            Console.ReadLine();
+                        }
                         break;
                 }
-            }
-
-            if (!payed)
-            {
-                Console.WriteLine("YOU LEFT WITHOUT PAYING!!! SHAME ON YOU!!!!!");
-                Console.WriteLine("\n\nPress Enter to Exit Program....");
-                Console.ReadLine();
-            }
-            else
-            {
-                Console.WriteLine("\n\nPress Enter to Exit Program....");
-                Console.ReadLine();
             }
 
         }

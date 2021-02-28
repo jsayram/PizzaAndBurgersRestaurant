@@ -50,7 +50,6 @@ namespace PizzaBurgerOOP
         {
             Console.WriteLine("\nChoose your Pizza Toppings");
             MenuItems.CreateMenu(MenuItems.PizzaToppingsMenuItems.pizzaToppingsMenuItemsList);
-           // Console.WriteLine("\n[0] Exit Pizza Toppings");
             pizza = MenuItems.PizzaToppingsMenuItems.ChoosePizzaToppings(choice, pizza);
             order.AddToPizzaOrder(pizza);
             return order;
@@ -59,10 +58,8 @@ namespace PizzaBurgerOOP
         //-----------------Burgers--------------------
         public void ShowBurgerOrder()
         {
-            
             if (MyBurgers.Count > 0)
             {
-                //Console.WriteLine($"My Burger Order:");
                 for (int i = 0; i < MyBurgers.Count; i++)
                 {
                     Console.WriteLine($"Burgers: {i+1}");
@@ -71,14 +68,12 @@ namespace PizzaBurgerOOP
                         Console.WriteLine($"\t{p.ToppingName}");
                     }
                 }
-            }
-           
+            }  
         }
         public Order BuildBurgerOrder(Order order, int choice, Burger burger)
         {
             Console.WriteLine("\nChoose your Burger Toppings");
             MenuItems.CreateMenu(MenuItems.BurgerToppingsMenuItems.burgerToppingsMenuItemsList);
-           // Console.WriteLine("\t[0] Exit Burger Toppings");
             burger = MenuItems.BurgerToppingsMenuItems.ChooseBurgerToppings(choice, burger);
             order.AddToBurgerOrder(burger);
             return order;
@@ -89,15 +84,11 @@ namespace PizzaBurgerOOP
         {
             if (MyExtras.Count > 0)
             {
-                Console.WriteLine($"Extra Items: ");
-                for (int i = 0; i < MyExtras.Count; i++)
+                Console.WriteLine($"Extra Items: {MyExtras.Count}");
+                for (int i = 0; i < Extra.extraItemsList.Count; i++)
                 {
-                     
-                    
-                        //Console.WriteLine("Text");
-                  Console.WriteLine($"\t{MyExtras[i].extraItemsList[0].extraItemName},{MyExtras[i].extraItemsList[0].extraItemSize},{MyExtras[i].extraItemsList[0].extraItemSizePrice:C}");
-                    
-                           
+                  Console.WriteLine($"\t{Extra.extraItemsList[i].extraItemName},{Extra.extraItemsList[i].extraItemSize},{Extra.extraItemsList[i].extraItemSizePrice:C}"); 
+                          
                 }
             }
         }
@@ -109,18 +100,31 @@ namespace PizzaBurgerOOP
                 Console.WriteLine("\nChoose your Extra Item");
                 MenuItems.CreateMenu(MenuItems.ExtraMenuItems.extraMenuItemsList);
                 Console.WriteLine("[0] Exit Extra Items Menu");
-                choiceItem = Convert.ToInt32(Console.ReadLine());
+               
+                while (!int.TryParse(Console.ReadLine(), out choiceItem))
+                {
+                    Console.Clear();
+                    Console.WriteLine("\nChoose your Extra Item");
+                    MenuItems.CreateMenu(MenuItems.ExtraMenuItems.extraMenuItemsList);
+                    Console.WriteLine("[0] Exit Extra Items Menu");
+                }
                 if (choiceItem > 0 && choiceItem <= MenuItems.ExtraMenuItems.extraMenuItemsList.Count)
                 {
                     Console.WriteLine($"Choice of Extra: {MenuItems.ExtraMenuItems.extraMenuItemsList[choiceItem - 1].itemName}\n");
                     Console.WriteLine("Item Size: ");
                     MenuItems.CreateMenu(MenuItems.ItemSizes.itemSizesList);
-
-                    choiceSize = Convert.ToInt32(Console.ReadLine());
-                    while (choiceSize > MenuItems.ItemSizes.itemSizesList.Count)
+                    while (!int.TryParse(Console.ReadLine(), out choiceSize))
                     {
-                        Console.WriteLine("\tNot a valid Size, please choose a valid option: ");
-                        choiceSize = Convert.ToInt32(Console.ReadLine());
+                        Console.Clear();
+                        Console.WriteLine($"Choice of Extra: {MenuItems.ExtraMenuItems.extraMenuItemsList[choiceItem - 1].itemName}\n");
+                        Console.WriteLine("Item Size: ");
+                        MenuItems.CreateMenu(MenuItems.ItemSizes.itemSizesList);
+
+                        while (choiceSize > MenuItems.ItemSizes.itemSizesList.Count)
+                        {
+                            Console.WriteLine("\tNot a valid Size, please choose a valid option: ");
+                            while (!int.TryParse(Console.ReadLine(), out choiceSize)) { }
+                        }
                     }
 
                     if (choiceSize > 0 && choiceSize <= MenuItems.ItemSizes.itemSizesList.Count)
@@ -163,6 +167,18 @@ namespace PizzaBurgerOOP
                                 order.AddToExtraOrder(extra);
 
                                 break;
+                            case 4:
+                                // x-large
+                                extra.AddExtraItemToList
+                                (
+                                    MenuItems.ExtraMenuItems.extraMenuItemsList[choiceItem - 1].itemName,
+                                    MenuItems.ExtraMenuItems.extraMenuItemsList[choiceItem - 1].price,
+                                    MenuItems.ItemSizes.itemSizesList[choiceSize - 1].itemName,
+                                    MenuItems.ItemSizes.itemSizesList[choiceSize - 1].price
+                                );
+                                order.AddToExtraOrder(extra);
+
+                                break;
                             default:
 
                                 break;
@@ -181,7 +197,7 @@ namespace PizzaBurgerOOP
         }
 
 
-        public void CheckOut(decimal personMoney)
+        public decimal CheckOut(decimal personMoney)
         {
             decimal itemsTotal = 0;
             itemsTotal += MyPizzas.Count*MenuItems.MainMenuItems.mainMenuItemsList[1].price;
@@ -189,10 +205,10 @@ namespace PizzaBurgerOOP
             itemsTotal += MyBurgers.Count*MenuItems.MainMenuItems.mainMenuItemsList[0].price;
 
 
-            for (int i = 0; i < MyExtras.Count; i++)
+            for (int i = 0; i < Extra.extraItemsList.Count; i++)
             {
 
-                itemsTotal += MyExtras[i].extraItemsList[0].extraItemSizePrice;
+                itemsTotal += Extra.extraItemsList[i].extraItemSizePrice;
 
             }
 
@@ -215,7 +231,15 @@ namespace PizzaBurgerOOP
                 }
             }
             Console.WriteLine($"\nOrder Total: {itemsTotal:C}\n");
-            
+            return itemsTotal;
+        }
+
+        public void ClearAllOrdersAndList()
+        {
+            MyExtras.Clear();
+            MyBurgers.Clear();
+            MyPizzas.Clear();
+            Extra.extraItemsList.Clear();
         }
 
 
