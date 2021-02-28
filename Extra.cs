@@ -16,6 +16,19 @@ namespace PizzaBurgerOOP
             return extraItemsList;
         }
 
+        public static Order AddExtrasToExtrasListandExtrasOrder(Extra extra, Order order,int choiceItem, int choiceSize)
+        {
+            extra.AddExtraItemToList
+            (
+                MenuItems.ExtraMenuItems.extraMenuItemsList[choiceItem - 1].itemName,
+                MenuItems.ExtraMenuItems.extraMenuItemsList[choiceItem - 1].price,
+                MenuItems.ItemSizes.itemSizesList[choiceSize - 1].itemName,
+                MenuItems.ItemSizes.itemSizesList[choiceSize - 1].price
+            );
+            order.AddToExtraOrder(extra);
+            return order;
+        }
+       
     }
 
 }

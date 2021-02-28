@@ -93,20 +93,15 @@ namespace PizzaBurgerOOP
             }
         }
 
-        public Order BuildExtraOrder(int choiceItem, int choiceSize, Order order, Extra extra)
+        public Order BuildExtraOrder(int choiceItem, int choiceSize,Order order,Extra extra)
         {
             while (choiceItem != 0)
             {
-                Console.WriteLine("\nChoose your Extra Item");
-                MenuItems.CreateMenu(MenuItems.ExtraMenuItems.extraMenuItemsList);
-                Console.WriteLine("[0] Exit Extra Items Menu");
-
+                MenuItems.ChooseExtraItemsMenu();          
                 while (!int.TryParse(Console.ReadLine(), out choiceItem))
                 {
                     Console.Clear();
-                    Console.WriteLine("\nChoose your Extra Item");
-                    MenuItems.CreateMenu(MenuItems.ExtraMenuItems.extraMenuItemsList);
-                    Console.WriteLine("[0] Exit Extra Items Menu");
+                    MenuItems.ChooseExtraItemsMenu();
                 }
                 if (choiceItem > 0 && choiceItem <= MenuItems.ExtraMenuItems.extraMenuItemsList.Count)
                 {
@@ -130,68 +125,14 @@ namespace PizzaBurgerOOP
                     if (choiceSize > 0 && choiceSize <= MenuItems.ItemSizes.itemSizesList.Count)
                     {
                         Console.WriteLine($"Chosen Size: {MenuItems.ItemSizes.itemSizesList[choiceSize - 1].itemName}\n");
-                        switch (choiceSize)
-                        {
-                            case 1:
-                                //small
-                                extra.AddExtraItemToList
-                                (
-                                    MenuItems.ExtraMenuItems.extraMenuItemsList[choiceItem - 1].itemName,
-                                    MenuItems.ExtraMenuItems.extraMenuItemsList[choiceItem - 1].price,
-                                    MenuItems.ItemSizes.itemSizesList[choiceSize - 1].itemName,
-                                    MenuItems.ItemSizes.itemSizesList[choiceSize - 1].price
-                                );
-                                order.AddToExtraOrder(extra);
-                                break;
-                            case 2:
-                                //medium
-                                extra.AddExtraItemToList
-                                (
-                                    MenuItems.ExtraMenuItems.extraMenuItemsList[choiceItem - 1].itemName,
-                                    MenuItems.ExtraMenuItems.extraMenuItemsList[choiceItem - 1].price,
-                                    MenuItems.ItemSizes.itemSizesList[choiceSize - 1].itemName,
-                                    MenuItems.ItemSizes.itemSizesList[choiceSize - 1].price
-                                );
-                                order.AddToExtraOrder(extra);
-
-                                break;
-                            case 3:
-                                // large
-                                extra.AddExtraItemToList
-                                (
-                                    MenuItems.ExtraMenuItems.extraMenuItemsList[choiceItem - 1].itemName,
-                                    MenuItems.ExtraMenuItems.extraMenuItemsList[choiceItem - 1].price,
-                                    MenuItems.ItemSizes.itemSizesList[choiceSize - 1].itemName,
-                                    MenuItems.ItemSizes.itemSizesList[choiceSize - 1].price
-                                );
-                                order.AddToExtraOrder(extra);
-
-                                break;
-                            case 4:
-                                // x-large
-                                extra.AddExtraItemToList
-                                (
-                                    MenuItems.ExtraMenuItems.extraMenuItemsList[choiceItem - 1].itemName,
-                                    MenuItems.ExtraMenuItems.extraMenuItemsList[choiceItem - 1].price,
-                                    MenuItems.ItemSizes.itemSizesList[choiceSize - 1].itemName,
-                                    MenuItems.ItemSizes.itemSizesList[choiceSize - 1].price
-                                );
-                                order.AddToExtraOrder(extra);
-
-                                break;
-                            default:
-
-                                break;
-                        }
+                        order = Extra.AddExtrasToExtrasListandExtrasOrder(extra,order,choiceItem,choiceSize);
                     }
 
                 }
-
                 if (choiceItem > MenuItems.ExtraMenuItems.extraMenuItemsList.Count || choiceSize > MenuItems.ItemSizes.itemSizesList.Count)
                 {
                     Console.WriteLine("Not a valid option, Please Choose Again");
                 }
-
             }
             return order;
         }
