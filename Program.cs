@@ -31,14 +31,12 @@ namespace PizzaBurgerOOP
                         Burger burger = new Burger();
                         int choice = 1;
                         order.BuildBurgerOrder(order, choice, burger);
-                        //order.ShowBurgerOrder();
                         break;
                     case 2:
                         //build pizza
                         Pizza pizza = new Pizza();
                         choice = 1;
                         order.BuildPizzaOrder(order, choice, pizza);
-                       // order.ShowPizzaOrder();
                         break;
                     case 3:
                         //Extra Items
@@ -50,7 +48,6 @@ namespace PizzaBurgerOOP
                     case 4:
                         //Checkout
                         Console.WriteLine("\nThank you for eating with us!!\n**** Here is your receipt ****\n");
-
                         order.ShowBurgerOrder();
                         order.ShowPizzaOrder();
                         order.ShowExtraOrder();
@@ -64,7 +61,13 @@ namespace PizzaBurgerOOP
                         payed = true;
                         break;
                     default:
-
+                        string oops;
+                        if(input == 0 && payed == false && (order.MyBurgers.Count+order.MyExtras.Count+order.MyPizzas.Count) > 0)
+                        {
+                            Console.WriteLine($"\nOops you forgot to pay, did you mean to Checkout instead? y/n");
+                            oops =  Console.ReadLine();
+                        }
+                        
                         break;
                 }
             }

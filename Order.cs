@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Xml.Schema;
 
 namespace PizzaBurgerOOP
@@ -88,13 +89,15 @@ namespace PizzaBurgerOOP
         {
             if (MyExtras.Count > 0)
             {
-                //Console.WriteLine($"My Extra Order:");
+                Console.WriteLine($"Extra Items: ");
                 for (int i = 0; i < MyExtras.Count; i++)
                 {
-                    Console.WriteLine($"Extra Items: {i + 1}");
+                     
                     
-                    Console.WriteLine($"\t{MyExtras[i].extraItemsList[i].extraItemName},{MyExtras[i].extraItemsList[i].extraItemSize},{MyExtras[i].extraItemsList[i].extraItemSizePrice:C}");
+                        //Console.WriteLine("Text");
+                  Console.WriteLine($"\t{MyExtras[i].extraItemsList[0].extraItemName},{MyExtras[i].extraItemsList[0].extraItemSize},{MyExtras[i].extraItemsList[0].extraItemSizePrice:C}");
                     
+                           
                 }
             }
         }
@@ -188,11 +191,9 @@ namespace PizzaBurgerOOP
 
             for (int i = 0; i < MyExtras.Count; i++)
             {
-                //foreach (var p in MyExtras[i].extraItemsList)
-                //{
-                    itemsTotal += MyExtras[i].extraItemsList[i].extraItemSizePrice;
-                    
-                //}
+
+                itemsTotal += MyExtras[i].extraItemsList[0].extraItemSizePrice;
+
             }
 
             for (int i = 0; i < MyBurgers.Count; i++)
